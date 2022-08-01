@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 
 public class LinkedList {
     private class Node {
@@ -10,6 +11,15 @@ public class LinkedList {
     }
     private Node first;
     private Node last;
+    private int size;
+
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
 
     private boolean isEmpty(){
         return first == null;
@@ -22,6 +32,7 @@ public class LinkedList {
             last.next = node;
             last = node;
         }
+        size++;
     }
 
     public void addFirst(int item){
@@ -32,6 +43,7 @@ public class LinkedList {
             node.next =first;
             first = node;
         }
+        size++;
     }
 
     public int indexOf(int item){
@@ -45,6 +57,55 @@ public class LinkedList {
         return -1;
     }
 
+    public void removeFirst(){
+        if (isEmpty())
+            throw new NoSuchElementException();
+        if(first == last){
+            first = last = null;
+        }else {
+            var second = first.next;
+            first.next = null;
+            first = second;
+        }
+        size--;
+    }
+
+    public void removeLast(){
+        if(isEmpty())
+            throw new NoSuchElementException();
+        if(first == last){
+            first = last = null;
+        }else {
+        var current = first;
+        while (current.next != last) {
+            current = current.next;
+        }
+        last = current;
+        last.next = null;
+        }
+        size--;
+    }
+
+    public boolean contains(int item){
+       return indexOf(item) != -1;
+    }
+
+    public int[] toArray(){
+        int[] array = new int[size];
+        var current = first;
+        var index = 0;
+        while (current != null){
+            array[index++]  = current.value;
+            current = current.next;
+        }
+        return array;
+    }
+
+    public void reverse(){
+        //[10 -> 20 -> 30]
+        //[10 <- 20 <- 30]
+
+    }
 
     /*public int[] toArray(LinkedList list){
         ArrayList<Integer> arr = new ArrayList<>();
