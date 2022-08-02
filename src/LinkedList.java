@@ -103,8 +103,22 @@ public class LinkedList {
 
     public void reverse(){
         //[10 -> 20 -> 30]
+        //  p    c     n
         //[10 <- 20 <- 30]
+        if(isEmpty()) return;
 
+        var previous = first;
+        var current = first.next;
+        while (current != null){
+            var next = current.next;
+            current.next = previous;
+            previous = current;
+            current = next;
+
+        }
+        last = first;
+        last.next = null;
+        first = previous;
     }
 
     /*public int[] toArray(LinkedList list){
