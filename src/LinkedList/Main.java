@@ -1,3 +1,7 @@
+package LinkedList;
+
+import LinkedList.LinkedList;
+
 import java.util.Arrays;
 
 public class Main {
